@@ -25,7 +25,10 @@ const globalSlice = createSlice({
     },
     addBooking(state, action) {
       const bookingData = action.payload;
-      state.favorites.push(bookingData);
+      state.bookings.push(bookingData);
+    },
+    resetBooking(state, action) {
+      state.bookings = [];
     },
   },
   extraReducers: (builder) => {
@@ -57,7 +60,7 @@ const globalSlice = createSlice({
   },
 });
 
-export const { addToFavorites, removeFromFavorites, addBooking } =
+export const { addToFavorites, removeFromFavorites, addBooking, resetBooking } =
   globalSlice.actions;
 
 export default globalSlice.reducer;

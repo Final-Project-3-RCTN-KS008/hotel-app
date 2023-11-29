@@ -34,7 +34,7 @@ const ProfileScreen = () => {
         </>
       ) : (
         // Redirect to login screen if user is not authenticated
-        <View>
+        <View style={styles.loginContainer}>
           <Text style={styles.title}>Please log in</Text>
           <Button title="Login" onPress={handleLoginRedirect} />
         </View>
@@ -78,5 +78,11 @@ const styles = StyleSheet.create({
   info: {
     marginLeft: 10,
   },
+  loginContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
+
 export default ProfileScreen;

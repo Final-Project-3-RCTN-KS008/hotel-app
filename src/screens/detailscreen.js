@@ -18,10 +18,8 @@ const DetailScreen = ({ route }) => {
     navigation.navigate("LoginScreen");
   };
   const handleBooking = () => {
-    // Implement your booking logic here
     navigation.navigate("BookingScreen", { hotel });
   };
-  // Use 'hotel' data to display details
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -44,7 +42,6 @@ const DetailScreen = ({ route }) => {
       >
         <Text style={styles.bookingButtonText}>Book Now</Text>
       </TouchableOpacity>
-      {/* Display other details of the hotel */}
     </ScrollView>
   );
 };
@@ -105,6 +102,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
-  // Add more styles as needed
 });
 export default DetailScreen;

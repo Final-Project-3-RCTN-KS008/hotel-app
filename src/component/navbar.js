@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/homescreen"; // Import the correct path to HomeScreen
-import BookingScreen from "../screens/bookingscreen";
+import BookingsPage from "../screens/bookingspage";
 import ProfileScreen from "../screens/profilescreen";
 import LoginScreen from "../screens/loginscreen";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -26,9 +26,9 @@ const NavBar = () => {
               ? (iconName = "person-circle")
               : (iconName = "person-circle-outline");
           }
-          // if (route.name === "Book") {
-          //   focused ? (iconName = "calendar") : (iconName = "calendar-outline");
-          // }
+          if (route.name === "Book") {
+            focused ? (iconName = "calendar") : (iconName = "calendar-outline");
+          }
           return <Icon name={iconName} />;
         },
       })}
@@ -39,7 +39,7 @@ const NavBar = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen name="Favorite" component={FavoriteScreen} />
-      {/* <Tab.Screen name="Book" component={BookingScreen} /> */}
+      <Tab.Screen name="Book" component={BookingsPage} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
 
       {/* <Tab.Screen name="Login" component={LoginScreen} /> */}

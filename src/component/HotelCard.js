@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     margin: 10,
     padding: 10,
-    width: "80%",
-    aspectRatio: 4 / 2,
+    width: "90%",
+    aspectRatio: 2 / 1,
     backgroundColor: "#fff",
   },
   image: {

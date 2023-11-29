@@ -25,7 +25,6 @@ const HomeScreen = () => {
     dispatch(fetchAllHotels());
   }, [dispatch]);
   const { hotels, isLoading, error } = useSelector((state) => state.hotels);
-  // console.log(hotels[0].image);
 
   const [searchQuery, setSearchQuery] = useState("");
 
