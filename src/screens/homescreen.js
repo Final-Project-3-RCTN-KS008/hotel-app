@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   FlatList,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllHotels, searchHotels } from "../../redux/global/globalAction";
@@ -28,7 +29,7 @@ const HomeScreen = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = () => {
+  const handleSearch = (searchQuery) => {
     Keyboard.dismiss();
     navigation.navigate("SearchScreen", {
       searchQuery: searchQuery,
@@ -42,29 +43,35 @@ const HomeScreen = () => {
   };
 
   const renderItem = ({ item }) => {
+    const handlePress = () => {
+      handleSearch(item.name);
+      console.log(item.name);
+    };
     return (
-      <View style={styles.destinationItem} key={item.id}>
-        <ImageBackground
-          source={item.image}
-          style={styles.destinationImage}
-          imageStyle={{ borderRadius: 10 }}
-        >
-          <View style={styles.imageTextContainer}>
-            <Text style={styles.destinationText}>{item.name}</Text>
-          </View>
-        </ImageBackground>
-      </View>
+      <TouchableOpacity onPress={handlePress}>
+        <View style={styles.destinationItem} key={item.id}>
+          <ImageBackground
+            source={item.image}
+            style={styles.destinationImage}
+            imageStyle={{ borderRadius: 10 }}
+          >
+            <View style={styles.imageTextContainer}>
+              <Text style={styles.destinationText}>{item.name}</Text>
+            </View>
+          </ImageBackground>
+        </View>
+      </TouchableOpacity>
     );
   };
   return (
     <ScrollView style={styles.container}>
       {isLoading ? (
-        <View style={[styles.loadingContainer]}>
+        <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       ) : error ? (
-        <View style={[styles.errorContainer]}>
-          <Text>Error: {error}</Text>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>Error: {error}</Text>
         </View>
       ) : (
         <View style={styles.content}>
@@ -73,7 +80,7 @@ const HomeScreen = () => {
             placeholder="Search..."
             value={searchQuery}
             onChangeText={(text) => setSearchQuery(text)}
-            onSubmitEditing={handleSearch}
+            onSubmitEditing={() => handleSearch(searchQuery)}
             onKeyPress={handleKeyPress}
           />
           <Text style={styles.header}>Popular Destinations</Text>
@@ -95,7 +102,7 @@ const HomeScreen = () => {
             showsHorizontalScrollIndicator={false}
           />
           <View style={styles.hotelContainer}>
-            {hotels.map((item, index) => (
+            {hotels.slice(0, 5).map((item, index) => (
               <HotelCard key={index} hotel={item} />
             ))}
           </View>
@@ -168,6 +175,18 @@ const styles = StyleSheet.create({
   destinationText: {
     color: "#fff",
     textAlign: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  errorText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "red",
   },
   // Add more styles for other components as needed
 });

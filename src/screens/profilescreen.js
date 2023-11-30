@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,13 +10,15 @@ const ProfileScreen = () => {
   const handleLoginRedirect = () => {
     navigation.navigate("LoginScreen");
   };
-
+  const handleSettingsNavigation = () => {
+    navigation.navigate("SettingScreen");
+  };
   return (
     <View style={styles.container}>
       {isAuthenticated ? (
         // Show profile information when user is authenticated
         <>
-          <Text style={styles.title}>Profile Information</Text>
+          <Text style={styles.title}>{user.name}'s Profile Information</Text>
           <View style={styles.userInfo}>
             <View style={styles.userInfoItem}>
               <Text style={styles.label}>Username:</Text>
@@ -30,13 +32,29 @@ const ProfileScreen = () => {
               <Text style={styles.label}>Email:</Text>
               <Text style={styles.info}>{user?.email}</Text>
             </View>
+            <View style={styles.userInfoItem}>
+              <Text style={styles.label}>Contact Number:</Text>
+              <Text style={styles.info}>
+                {user?.phoneNumber ? user.phoneNumber : "N/A"}
+              </Text>
+            </View>
           </View>
+          <TouchableOpacity
+            style={styles.settingsButton}
+            onPress={handleSettingsNavigation}
+          >
+            <Text style={styles.settingsButtonText}>Settings</Text>
+          </TouchableOpacity>
         </>
       ) : (
-        // Redirect to login screen if user is not authenticated
         <View style={styles.loginContainer}>
-          <Text style={styles.title}>Please log in</Text>
-          <Button title="Login" onPress={handleLoginRedirect} />
+          <Text style={styles.title}>You're currently not logged in</Text>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={handleLoginRedirect}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -50,6 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
   },
   title: {
+    alignSelf: "center",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
@@ -78,10 +97,38 @@ const styles = StyleSheet.create({
   info: {
     marginLeft: 10,
   },
+  settingsButton: {
+    backgroundColor: "#3498db",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 20, // Adjust the spacing from the previous element as needed
+  },
+
+  settingsButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
   loginContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  loginButton: {
+    backgroundColor: "#3498db",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight: "bold",
   },
 });
 

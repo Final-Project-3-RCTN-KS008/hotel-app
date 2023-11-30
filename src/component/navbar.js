@@ -12,9 +12,10 @@ const NavBar = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused }) => {
           let iconName;
-
+          let size = 20;
+          let color = focused ? (color = "#4C4DDC") : (color = "grey");
           if (route.name === "Home") {
             focused ? (iconName = "home") : (iconName = "home-outline");
           }
@@ -29,8 +30,9 @@ const NavBar = () => {
           if (route.name === "Book") {
             focused ? (iconName = "calendar") : (iconName = "calendar-outline");
           }
-          return <Icon name={iconName} />;
+          return <Icon name={iconName} color={color} size={size} />;
         },
+        tabBarActiveTintColor: "#4C4DDC",
       })}
     >
       <Tab.Screen

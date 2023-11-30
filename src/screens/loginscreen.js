@@ -22,8 +22,8 @@ const LoginScreen = () => {
   const handleLogin = () => {
     dispatch(
       login({
-        username: "Username",
-        password: "password",
+        username: username,
+        password: password,
       })
     );
   };
@@ -36,7 +36,7 @@ const LoginScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
-      {/* <TextInput
+      <TextInput
         style={styles.input}
         placeholder="Username or Email"
         value={username}
@@ -48,7 +48,7 @@ const LoginScreen = () => {
         secureTextEntry={true}
         value={password}
         onChangeText={(text) => setPassword(text)}
-      /> */}
+      />
       {error && <Text style={styles.error}>{error}</Text>}
       <TouchableOpacity
         style={styles.loginButton}

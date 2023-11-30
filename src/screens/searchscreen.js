@@ -47,9 +47,11 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     marginTop: 20,
+    marginBottom: 20,
   },
   content: {
     alignItems: "center",
+    marginBottom: 30,
   },
   loadingContainer: {
     flex: 1,
