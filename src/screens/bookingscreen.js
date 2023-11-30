@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  ToastAndroid,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useDispatch } from "react-redux";
@@ -15,6 +16,7 @@ import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 const BookingScreen = ({ route }) => {
   const { hotel } = route.params;
+  const today = new Date();
   const bookingDetails = {
     Name: hotel.name,
     Address: hotel.address,
@@ -69,8 +71,9 @@ const BookingScreen = ({ route }) => {
       contactNumber,
       totalPrice,
     };
-    navigation.navigate("Main");
+    navigation.navigate("Book");
     dispatch(addBooking(bookingData));
+    ToastAndroid.show("Booking Successful", ToastAndroid.SHORT);
   };
   return (
     <ScrollView style={styles.container}>
@@ -110,6 +113,7 @@ const BookingScreen = ({ route }) => {
             is24Hour={true}
             display="default"
             onChange={handleCheckInChange}
+            minimumDate={today}
           />
         )}
         <Text>Check-in: {checkInDate.toDateString()}</Text>
@@ -128,11 +132,12 @@ const BookingScreen = ({ route }) => {
             is24Hour={true}
             display="default"
             onChange={handleCheckOutChange}
+            minimumDate={today}
           />
         )}
         <Text>Check-out: {checkOutDate.toDateString()}</Text>
       </View>
-      <Text style={{ alignSelf: "center" }}>
+      <Text style={styles.priceText}>
         Total Price:{" "}
         {totalPrice.toLocaleString("id-ID", {
           style: "currency",
@@ -179,6 +184,11 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     marginVertical: 10,
+  },
+  priceText: {
+    alignSelf: "center",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
 

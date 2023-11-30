@@ -20,7 +20,7 @@ const HotelCard = ({ hotel }) => {
     }
   };
   const handlePress = () => {
-    navigation.navigate("DetailScreen", { hotel });
+    navigation.navigate("Detail", { hotel });
   };
 
   return (

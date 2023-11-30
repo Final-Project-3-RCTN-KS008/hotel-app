@@ -5,15 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  ToastAndroid,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../redux/auth/authSlice";
+import { useNavigation } from "@react-navigation/native";
 
 const SettingsScreen = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [email, setEmail] = useState(user?.email || "");
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || "");
+  const navigation = useNavigation();
   const currentUserData = {
     name: user.name,
     username: user.username,
@@ -25,6 +28,8 @@ const SettingsScreen = () => {
       phoneNumber,
     };
     dispatch(updateUser(user));
+    ToastAndroid.show("Change data success", ToastAndroid.SHORT);
+    navigation.navigate("Profile");
   };
 
   return (

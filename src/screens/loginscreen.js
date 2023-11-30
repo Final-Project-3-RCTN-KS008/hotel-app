@@ -5,11 +5,11 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ToastAndroid,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/auth/authAction";
 import { useNavigation } from "@react-navigation/native"; // Adjust the path as per your project structure
-
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
@@ -30,6 +30,7 @@ const LoginScreen = () => {
   useEffect(() => {
     if (isAuthenticated) {
       navigation.navigate("Main");
+      ToastAndroid.show("Login Successful", ToastAndroid.SHORT);
     }
   }, [isAuthenticated, navigation]);
 

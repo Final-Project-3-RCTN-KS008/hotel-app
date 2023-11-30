@@ -17,7 +17,7 @@ const AppNavigator = () => {
         options={{ headerShown: false }} // Hide the header for the bottom tabs
       />
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} />
+      <Stack.Screen name="Detail" component={DetailScreen} />
       <Stack.Screen name="BookingScreen" component={BookingScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="SettingScreen" component={SettingScreen} />
