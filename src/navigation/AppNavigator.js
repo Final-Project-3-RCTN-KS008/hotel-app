@@ -19,8 +19,6 @@ const AppNavigator = () => {
       <Stack.Screen name="DetailScreen" component={DetailScreen} />
       <Stack.Screen name="BookingScreen" component={BookingScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
-
-      {/* Define other screens or nested navigators here */}
     </Stack.Navigator>
   );
 };
